@@ -1,0 +1,95 @@
+# Actel Physical design constraints file
+
+# Version: 10.1 SP3 10.1.3.1
+
+# Design Name: ddk 
+
+# Input Netlist Format: edif 
+
+# Family: ProASIC3 , Die: A3PN125 , Package: 100 VQFP , Speed grade: STD 
+
+# Date generated: Fri Apr 26 22:42:47 2013 
+
+
+#
+# IO banks setting
+#
+
+set_iobank Bank1 -vcci 3.30 -fixed no
+set_iobank Bank0 -vcci 3.30 -fixed no
+
+#
+# I/O constraints
+#
+
+set_io CH1\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 26 -fixed yes
+set_io CH1\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 27 -fixed yes
+set_io CH1\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 28 -fixed yes
+set_io CH1\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 29 -fixed yes
+set_io CH1\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 30 -fixed yes
+set_io CH1\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 31 -fixed yes
+set_io CH2\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 32 -fixed yes
+set_io CH2\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 33 -fixed yes
+set_io CH2\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 34 -fixed yes
+set_io CH2\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 35 -fixed yes
+set_io CH2\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 36 -fixed yes
+set_io CH2\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 40 -fixed yes
+set_io CH3\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 41 -fixed yes
+set_io CH3\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 42 -fixed yes
+set_io CH3\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 43 -fixed yes
+set_io CH3\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 44 -fixed yes
+set_io CH3\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 45 -fixed yes
+set_io CH3\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 46 -fixed yes
+set_io CH4\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 57 -fixed yes
+set_io CH4\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 58 -fixed yes
+set_io CH4\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 59 -fixed yes
+set_io CH4\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 60 -fixed yes
+set_io CH4\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 61 -fixed yes
+set_io CH4\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 62 -fixed yes
+set_io CH5\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 63 -fixed yes
+set_io CH5\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 64 -fixed yes
+set_io CH5\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 65 -fixed yes
+set_io CH5\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 69 -fixed yes
+set_io CH5\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 70 -fixed yes
+set_io CH5\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 71 -fixed yes
+set_io CH6\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 72 -fixed yes
+set_io CH6\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 73 -fixed yes
+set_io CH6\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 76 -fixed yes
+set_io CH6\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 77 -fixed yes
+set_io CH6\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 78 -fixed yes
+set_io CH6\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 79 -fixed yes
+set_io CH7\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 80 -fixed yes
+set_io CH7\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 81 -fixed yes
+set_io CH7\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 82 -fixed yes
+set_io CH7\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 83 -fixed yes
+set_io CH7\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 84 -fixed yes
+set_io CH7\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 85 -fixed yes
+set_io CH8\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 86 -fixed yes
+set_io CH8\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 90 -fixed yes
+set_io CH8\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 91 -fixed yes
+set_io CH8\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 92 -fixed yes
+set_io CH8\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 93 -fixed yes
+set_io CH8\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 94 -fixed yes
+set_io DATA\[0\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 23 -fixed yes
+set_io DATA\[1\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 22 -fixed yes
+set_io DATA\[2\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 21 -fixed yes
+set_io DATA\[3\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 20 -fixed yes
+set_io DATA\[4\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 19 -fixed yes
+set_io DATA\[5\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 16 -fixed yes
+set_io DATA\[6\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 15 -fixed yes
+set_io DATA\[7\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 13 -fixed yes
+set_io DATA\[8\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 3 -fixed yes
+set_io DATA\[9\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 2 -fixed yes
+set_io DATA\[10\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 95 -fixed yes
+set_io DATA\[11\] -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL Up -REGISTER No -OUT_LOAD 35 -pinname 96 -fixed yes
+set_io DATA\[12\] -iostd LVTTL -RES_PULL Up -REGISTER No -pinname 97 -fixed yes
+set_io DATA\[13\] -iostd LVTTL -RES_PULL Up -REGISTER No -pinname 98 -fixed yes
+set_io DATA\[14\] -iostd LVTTL -RES_PULL Up -REGISTER No -pinname 99 -fixed yes
+set_io DATA\[15\] -iostd LVTTL -RES_PULL Up -REGISTER No -pinname 100 -fixed yes
+set_io RX1 -iostd LVTTL -OUT_DRIVE 8 -SLEW High -RES_PULL None -REGISTER No -OUT_LOAD 35 -pinname 5 -fixed yes
+set_io RX2 -iostd LVTTL -RES_PULL None -REGISTER No -pinname 6 -fixed yes
+set_io RX3 -iostd LVTTL -RES_PULL None -REGISTER No -pinname 8 -fixed yes
+set_io SysClk -iostd LVTTL -RES_PULL Up -REGISTER No -pinname 11 -fixed yes
+set_io TX1 -iostd LVTTL -RES_PULL None -REGISTER No -pinname 4 -fixed yes
+set_io TX2 -iostd LVTTL -RES_PULL None -REGISTER No -pinname 7 -fixed yes
+set_io TX3 -iostd LVTTL -RES_PULL None -REGISTER No -pinname 10 -fixed yes
