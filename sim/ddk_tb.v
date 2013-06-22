@@ -70,8 +70,8 @@ wire	[5:0] ch2_oe;
 ddk_core ddk_corei(
 		.SysClk(tb_clk),		// System Clock
 		.SysRst(tb_rst),		// System Reset
-		.TX2(TX2),					// LPC TXD2
-		.RX2(RX2),					// LPC RXD2
+		.TX1(TX1),					// LPC TXD1
+		.RX1(RX1),					// LPC RXD1
 		.DataClk(tb_dclk),			// LPC TXD3
 		.DataWe(tb_we_o),			// LPC RXD3
 		.DATA(data),				// Parallel Data
