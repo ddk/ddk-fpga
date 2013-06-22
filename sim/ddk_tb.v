@@ -218,15 +218,15 @@ begin
 end
 
 // Create human-readable labels for current state
-always @ (ddk_corei.uart2_tx.state)
-begin
-	case (ddk_corei.uart2_tx.state)
-		`UART_START:	uart2_tx_state = "Start";
-		`UART_DATA:		uart2_tx_state = "Data";
-		`UART_STOP:		uart2_tx_state = "Stop";
-		`UART_IDLE:		uart2_tx_state = "Idle";
-		default: 			uart2_tx_state = "??";
-	endcase
-end
+// always @ (ddk_corei.uart2_tx.state)
+// begin
+// 	case (ddk_corei.uart2_tx.state)
+// 		`UART_START:	uart2_tx_state = "Start";
+// 		`UART_DATA:		uart2_tx_state = "Data";
+// 		`UART_STOP:		uart2_tx_state = "Stop";
+// 		`UART_IDLE:		uart2_tx_state = "Idle";
+// 		default: 			uart2_tx_state = "??";
+// 	endcase
+// end
 
 endmodule
