@@ -49,9 +49,13 @@ reg clkd;
 
 reg        tb_we_o;
 reg  [7:0] tb_dat_o;
-reg  [5:2] tb_adr_o;
+reg  [4:0] tb_adr_o;
 reg        tb_stb_o;
 wire [7:0] tb_dat_i;
+wire       tb_ack_i;
+
+reg  [7:0] tb_cnt_a;
+reg  [7:0] tb_cnt_d;
 
 wire  [5:0] ch_in;
 wire  [5:0] ch_out;
@@ -86,12 +90,14 @@ initial
 begin
   tb_clk <= 1'b0;
   tb_rst <= 1'b0;
+  tb_en <= 1'b0;
   clka <= 1'b0;
   clkb <= 1'b0;
   clkc <= 1'b0;
   clkd <= 1'b0;
   #5 tb_rst <= 1'b1;
   #20 tb_rst <= 1'b0;
+  tb_en <= 1'b1;
 end
 
 // Generate clock (25MHz)
@@ -118,84 +124,120 @@ begin
   #160 clkd <= ~clkd;
 end
 
+// Generate a system clock (50MHz)
 always
 begin
   #10 tb_clk <= ~tb_clk;
 end
 
-`define TB_READ    1'd0
-`define TB_WRITE  1'd1
 
-reg [1:0] tb_state;
-reg [3:0] tb_cnt;
+task wb_write;
+input [7:0] adr_o;
+input [7:0] dat_o;
 
-always  @ (posedge tb_clk or posedge tb_rst)
 begin
-  if(tb_rst)
+  @(posedge tb_clk);
+  tb_stb_o <= 1'b1;
+  tb_we_o <= 1'b1;
+  tb_dat_o <= dat_o;
+  tb_adr_o <= adr_o;
+
+  @(posedge tb_clk);
+  tb_stb_o <= 1'b0;
+
+  @(posedge tb_clk);
+  if(!tb_ack_i)
   begin
-    tb_dat_o <= 8'h00;
-    tb_en <= 1'b0;
-    tb_we_o <= 1'b0;
-    tb_state <= `TB_WRITE;
-    tb_cnt <= 4'd0;
-    tb_adr_o <= 4'd0;
-  end
-  else
-  begin
-    tb_stb_o <= 1'b0;
-    tb_dat_o <= tb_dat_o;
-    tb_adr_o <= tb_adr_o;
-    tb_cnt <= tb_cnt + 1;
-
-    case(tb_state)
-      `TB_WRITE:
-      begin
-        tb_we_o <= 1'b1;
-
-        if(tb_cnt == 4'hf)
-        begin
-          tb_stb_o <= 1'b1;
-          tb_state <= `TB_READ;
-        end
-      end
-
-      `TB_READ:
-      begin
-        tb_we_o <= 1'b0;
-
-        case(tb_cnt)
-          4'hd:
-            tb_stb_o <= 1'b1; // Get the current value
-          4'hf:
-          begin
-            tb_dat_o <= tb_dat_o + 1; // Increment
-            tb_state <= `TB_WRITE;
-
-            if(tb_adr_o >= `PORT_PIN0_CONF)
-            begin
-              if(tb_dat_o == 8'h1f)
-              begin
-                tb_adr_o <= tb_adr_o + 1;
-                tb_dat_o <= 8'd0;
-
-                if(tb_adr_o == `PORT_PIN5_CONF)
-                  $stop;
-              end
-            end
-            else
-            begin
-              if(tb_dat_o == 8'h3f)
-              begin
-                tb_dat_o <= 8'd0;
-                tb_adr_o <= tb_adr_o + 1;
-              end
-            end
-          end
-        endcase
-      end
-
-    endcase
+    $display("Write failed: 0x%02H, 0x%02H", tb_adr_o, tb_dat_o);
   end
 end
+endtask
 
+reg [7:0] read_data;
+
+task wb_read;
+input [7:0] adr_o;
+
+begin
+  @(posedge tb_clk);
+  tb_stb_o <= 1'b1;
+  tb_we_o <= 1'b0;
+  tb_adr_o <= adr_o;
+
+  @(posedge tb_clk);
+  tb_stb_o <= 1'b0;
+
+  @(posedge tb_clk);
+  read_data <= tb_dat_i;
+
+  if(!tb_ack_i)
+  begin
+    $display("Read failed: 0x%02H, 0x%02H", tb_adr_o, tb_dat_i);
+  end
+end
+endtask
+
+always @(posedge tb_rst)
+begin
+  tb_dat_o <= 8'h00;
+  tb_we_o <= 1'b0;
+  tb_adr_o <= 4'd0;
+  tb_cnt_a <= 8'd0;
+  tb_cnt_d <= 8'd0;
+end
+
+initial
+begin
+  wait(tb_en)
+  // (r/w) Peripheral configuration register
+  #1 wb_read(`PORT_CONF);
+  #1 wb_write(`PORT_CONF,8'hff);
+  #1 wb_read(`PORT_CONF);
+  #1 if(read_data != 8'h3f) $stop;
+
+  // (r/w) Port status
+  #1 wb_read(`PORT_STATUS);
+  #1 wb_write(`PORT_STATUS,8'hff);
+  #1 wb_read(`PORT_STATUS);
+  #1 if(read_data != 8'h3f) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN0_CONF);
+  #1 wb_write(`PORT_PIN0_CONF,8'h00);
+  #1 wb_read(`PORT_PIN0_CONF);
+  #1 if(read_data != 8'h00) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN1_CONF);
+  #1 wb_write(`PORT_PIN1_CONF,8'h01);
+  #1 wb_read(`PORT_PIN1_CONF);
+  #1 if(read_data != 8'h01) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN2_CONF);
+  #1 wb_write(`PORT_PIN2_CONF,8'h03);
+  #1 wb_read(`PORT_PIN2_CONF);
+  #1 if(read_data != 8'h03) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN3_CONF);
+  #1 wb_write(`PORT_PIN3_CONF,8'h07);
+  #1 wb_read(`PORT_PIN3_CONF);
+  #1 if(read_data != 8'h07) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN4_CONF);
+  #1 wb_write(`PORT_PIN4_CONF,8'h0f);
+  #1 wb_read(`PORT_PIN4_CONF);
+  #1 if(read_data != 8'h0f) $stop;
+
+  // (r/w) Output clocks
+  #1 wb_read(`PORT_PIN5_CONF);
+  #1 wb_write(`PORT_PIN5_CONF,8'h1f);
+  #1 wb_read(`PORT_PIN5_CONF);
+  #1 if(read_data != 8'h1f) $stop;
+
+  $display("Testbench completed successfully!");
+  $stop;
+end
 endmodule
