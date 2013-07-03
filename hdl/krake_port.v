@@ -113,10 +113,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[0] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[0];
+            ack_o <= 1'b1;
           end
         end
 
@@ -125,10 +127,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[1] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[1];
+            ack_o <= 1'b1;
           end
         end
 
@@ -137,10 +141,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[2] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[2];
+            ack_o <= 1'b1;
           end
         end
 
@@ -149,10 +155,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[3] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[3];
+            ack_o <= 1'b1;
           end
         end
 
@@ -161,10 +169,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[4] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[4];
+            ack_o <= 1'b1;
           end
         end
 
@@ -173,10 +183,12 @@ begin
           if(we_i) // Write
           begin
             clk_conf[5] <= dat_i[4:0];
+            ack_o <= 1'b1;
           end
           else // Read
           begin
             dat_o[4:0] <= clk_conf[5];
+            ack_o <= 1'b1;
           end
         end
 
