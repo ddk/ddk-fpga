@@ -39,88 +39,88 @@
 `include "../hdl/reg_defs.v"
 
 // We will use Wishbone nomencalture in thsi file
-module	clk_gen(
-		input wire				clk_i,
-		input wire				rst_i,
-		output reg				ack_o,
-		input wire [7:0]	dat_i,
-		input wire [3:0]	adr_i,
-		output reg [7:0]	dat_o,
-		input wire				stb_i,
-		input wire				we_i,
-		output wire				clk_posedge,
-		output wire 			clk_out);
+module  clk_gen(
+    input wire        clk_i,
+    input wire        rst_i,
+    output reg        ack_o,
+    input wire [7:0]  dat_i,
+    input wire [3:0]  adr_i,
+    output reg [7:0]  dat_o,
+    input wire        stb_i,
+    input wire        we_i,
+    output wire       clk_posedge,
+    output wire       clk_out);
 
 // clk_gen signals
-reg 				en;
-reg 				div_clk;
-reg [7:0]		div;
-reg [7:0]		periods;
+reg          en;
+reg          div_clk;
+reg [7:0]    div;
+reg [7:0]    periods;
 
 assign clk_out = div_clk && en;
 assign clk_posedge = (periods == 8'd0) && div_clk && en;
 
 always @ (posedge clk_i)
 begin
-	if(rst_i)
-	begin
-		div <= 8'd0;
-		en <= 1'b0;
-		div_clk <= 1'b0;
-		periods <= 8'd0;
-		dat_o <= 8'd0;
-	end
-	else
-	begin
-		// Default Assignments
-		en <= en;
-		div <= div;
-		periods <= (periods + 1);
-		div_clk <= div_clk;
-		ack_o <= 1'b0;
-		dat_o <= 8'd0;
+  if(rst_i)
+  begin
+    div <= 8'd0;
+    en <= 1'b0;
+    div_clk <= 1'b0;
+    periods <= 8'd0;
+    dat_o <= 8'd0;
+  end
+  else
+  begin
+    // Default Assignments
+    en <= en;
+    div <= div;
+    periods <= (periods + 1);
+    div_clk <= div_clk;
+    ack_o <= 1'b0;
+    dat_o <= 8'd0;
 
-		if(periods == div)
-		begin
-			periods <= 8'd0;
-			div_clk <= ~div_clk;
-		end
+    if(periods == div)
+    begin
+      periods <= 8'd0;
+      div_clk <= ~div_clk;
+    end
 
-		// WBL Slave
-		if(stb_i)
-		begin
-			case(adr_i)
-				`CLK_GEN_STATUS:
-				begin
-					if(we_i) // Write
-					begin
-						en <= dat_i[0];
-						ack_o <= 1'b1;
-					end
-					else // Read
-					begin
-						dat_o[0] <= en;
-						ack_o <= 1'b1;
-					end
-				end
+    // WBL Slave
+    if(stb_i)
+    begin
+      case(adr_i)
+        `CLK_GEN_STATUS:
+        begin
+          if(we_i) // Write
+          begin
+            en <= dat_i[0];
+            ack_o <= 1'b1;
+          end
+          else // Read
+          begin
+            dat_o[0] <= en;
+            ack_o <= 1'b1;
+          end
+        end
 
-				`CLK_GEN_DIV:
-				begin
-					if(we_i) // Write
-					begin
-						div <= dat_i;
-						periods <= 8'd0;
-						ack_o <= 1'b1;
-					end
-					else // Read
-					begin
-						dat_o <= div;
-						ack_o <= 1'b1;
-					end
-				end
-			endcase
-		end
-	end
+        `CLK_GEN_DIV:
+        begin
+          if(we_i) // Write
+          begin
+            div <= dat_i;
+            periods <= 8'd0;
+            ack_o <= 1'b1;
+          end
+          else // Read
+          begin
+            dat_o <= div;
+            ack_o <= 1'b1;
+          end
+        end
+      endcase
+    end
+  end
 end
 
 endmodule

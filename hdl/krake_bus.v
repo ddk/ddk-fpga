@@ -34,31 +34,33 @@
  * Description: This module connects the external parallel bus to the core.
  */
 
-module	krake_bus(
-			input wire 				clk_i,			// Clock
-			input wire 				rst_i,			// Reset
-			input wire [15:0] data,				// External data bus
-			input wire 				data_clk,		// External data bus clk
-			input wire 				we,					// Write Enable
-			output reg 				stb_o,			// WB STB_O
-			output reg [7:0]	adr_o,			// WB ADR_O
-			output reg [7:0]	dat_o,			// WB DAT_O
-			output reg 				we_o);			// WB WE_O
+module  krake_bus(
+      input wire         clk_i,    // Clock
+      input wire         rst_i,    // Reset
+      input wire [15:0]  data,     // External data bus
+      input wire         data_clk, // External data bus clk
+      input wire         we,       // Write Enable
+      output reg         stb_o,    // WB STB_O
+      output reg [7:0]   adr_o,    // WB ADR_O
+      output reg [7:0]   dat_o,    // WB DAT_O
+      output reg         we_o);    // WB WE_O
 
-reg	clean; // Store the previous clk state
-reg	dirty; // Store the previous clk state
+reg  clean; // Store the previous clk state
+reg  dirty; // Store the previous clk state
 
 // Simply synchronize the inputs to the system clock
-always	@ (posedge clk_i)
+always  @ (posedge clk_i)
 begin
-	stb_o <= 1'b0;
-	dirty <= data_clk;
-	clean <= dirty;
-	we_o <= we;							// Write Enable
-	adr_o <= data[15:8];		// 8-bit address
-	dat_o <= data[7:0];			// 8-bit data
-	if(clean ^ dirty) // Wait for the clock to flip
-		stb_o <= 1'b1;
+  stb_o <= 1'b0;
+  dirty <= data_clk;
+  clean <= dirty;
+  we_o <= we; // Write Enable
+  adr_o <= data[15:8]; // 8-bit address
+  dat_o <= data[7:0]; // 8-bit data
+
+  // Wait for the clock to flip
+  if(clean ^ dirty)
+    stb_o <= 1'b1;
 end
 
 endmodule

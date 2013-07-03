@@ -36,22 +36,22 @@
  */
 
 module ddk_top(
-				input		wire	SysClk,						// System Clock
-				input		wire	TX1,							// LPC TXD2
-				output	wire	RX1,							// LPC RXD2
-				input		wire	TX2,							// LPC TXD2
-				input		wire	RX2,							// LPC RXD2
-				input		wire	TX3,							// LPC TXD3
-				input		wire	RX3,							// LPC RXD3
-				input		wire	[15:0]	DATA,			// Parallel Data
-				inout		wire	[5:0]		CH1,			// CH1
-				inout		wire	[5:0]		CH2,			// CH2
-				inout		wire	[5:0]		CH3,			// CH3
-				inout		wire	[5:0]		CH4,			// CH4
-				inout		wire	[5:0]		CH5,			// CH5
-				inout		wire	[5:0]		CH6,			// CH6
-				inout		wire	[5:0]		CH7,			// CH7
-				inout		wire	[5:0]		CH8);			// CH8
+        input    wire  SysClk,        // System Clock
+        input    wire  TX1,           // LPC TXD2
+        output   wire  RX1,           // LPC RXD2
+        input    wire  TX2,           // LPC TXD2
+        input    wire  RX2,           // LPC RXD2
+        input    wire  TX3,           // LPC TXD3
+        input    wire  RX3,           // LPC RXD3
+        input    wire  [15:0]  DATA,  // Parallel Data
+        inout    wire  [5:0]    CH1,  // CH1
+        inout    wire  [5:0]    CH2,  // CH2
+        inout    wire  [5:0]    CH3,  // CH3
+        inout    wire  [5:0]    CH4,  // CH4
+        inout    wire  [5:0]    CH5,  // CH5
+        inout    wire  [5:0]    CH6,  // CH6
+        inout    wire  [5:0]    CH7,  // CH7
+        inout    wire  [5:0]    CH8); // CH8
 
 // CH1
 wire [5:0] CORE_CH1_OUT;
@@ -129,37 +129,37 @@ wire DataClk;
 assign DataClk = TX3;
 
 ddk_core corei(
-				.SysClk(SysClk),				// System Clock
-				.SysRst(SysRst),				// System RST
-				.TX1(TX1),							// LPC TXD1
-				.RX1(RX1),							// LPC RXD1
-				.DataClk(DataClk),			// LPC TXD3
-				.DataWe(DataWe),				// LPC RXD3
-				.DATA(DATA_IN),					// Parallel Data
-				.CH1_IN(CH1_IN),				// CH1 Input
-				.CH1_OUT(CORE_CH1_OUT),	// CH1 Output
-				.CH1_OE(CORE_CH1_OE),		// CH1 Output enable
-				.CH2_IN(CH2_IN),				// CH2 Input
-				.CH2_OUT(CORE_CH2_OUT),	// CH2 Output
-				.CH2_OE(CORE_CH2_OE),		// CH2 Output enable
-				.CH3_IN(CH3_IN),				// CH3 Input
-				.CH3_OUT(CORE_CH3_OUT),	// CH3 Output
-				.CH3_OE(CORE_CH3_OE),		// CH3 Output enable
-				.CH4_IN(CH4_IN),				// CH4 Input
-				.CH4_OUT(CORE_CH4_OUT),	// CH4 Output
-				.CH4_OE(CORE_CH4_OE),		// CH4 Output enable
-				.CH5_IN(CH5_IN),				// CH5 Input
-				.CH5_OUT(CORE_CH5_OUT),	// CH5 Output
-				.CH5_OE(CORE_CH5_OE),		// CH5 Output enable
-				.CH6_IN(CH6_IN),				// CH6 Input
-				.CH6_OUT(CORE_CH6_OUT),	// CH6 Output
-				.CH6_OE(CORE_CH6_OE),		// CH6 Output enable
-				.CH7_IN(CH7_IN),				// CH7 Input
-				.CH7_OUT(CORE_CH7_OUT),	// CH7 Output
-				.CH7_OE(CORE_CH7_OE),		// CH7 Output enable
-				.CH8_IN(CH8_IN),				// CH8 Input
-				.CH8_OUT(CORE_CH8_OUT),	// CH8 Output
-				.CH8_OE(CORE_CH8_OE));	// CH8 Output enable
+        .SysClk(SysClk),        // System Clock
+        .SysRst(SysRst),        // System RST
+        .TX1(TX1),              // LPC TXD1
+        .RX1(RX1),              // LPC RXD1
+        .DataClk(DataClk),      // LPC TXD3
+        .DataWe(DataWe),        // LPC RXD3
+        .DATA(DATA_IN),         // Parallel Data
+        .CH1_IN(CH1_IN),        // CH1 Input
+        .CH1_OUT(CORE_CH1_OUT), // CH1 Output
+        .CH1_OE(CORE_CH1_OE),   // CH1 Output enable
+        .CH2_IN(CH2_IN),        // CH2 Input
+        .CH2_OUT(CORE_CH2_OUT), // CH2 Output
+        .CH2_OE(CORE_CH2_OE),   // CH2 Output enable
+        .CH3_IN(CH3_IN),        // CH3 Input
+        .CH3_OUT(CORE_CH3_OUT), // CH3 Output
+        .CH3_OE(CORE_CH3_OE),   // CH3 Output enable
+        .CH4_IN(CH4_IN),        // CH4 Input
+        .CH4_OUT(CORE_CH4_OUT), // CH4 Output
+        .CH4_OE(CORE_CH4_OE),   // CH4 Output enable
+        .CH5_IN(CH5_IN),        // CH5 Input
+        .CH5_OUT(CORE_CH5_OUT), // CH5 Output
+        .CH5_OE(CORE_CH5_OE),   // CH5 Output enable
+        .CH6_IN(CH6_IN),        // CH6 Input
+        .CH6_OUT(CORE_CH6_OUT), // CH6 Output
+        .CH6_OE(CORE_CH6_OE),   // CH6 Output enable
+        .CH7_IN(CH7_IN),        // CH7 Input
+        .CH7_OUT(CORE_CH7_OUT), // CH7 Output
+        .CH7_OE(CORE_CH7_OE),   // CH7 Output enable
+        .CH8_IN(CH8_IN),        // CH8 Input
+        .CH8_OUT(CORE_CH8_OUT), // CH8 Output
+        .CH8_OE(CORE_CH8_OE));  // CH8 Output enable
 
 // CH1
 BIBUF \BUF_CH1[0]  (.PAD(CH1[0]), .D(CH1_OUT[0]), .E(CH1_OE[0]), .Y(CH1_IN[0]));
@@ -226,18 +226,18 @@ BIBUF \BUF_CH8[4]  (.PAD(CH8[4]), .D(CH8_OUT[4]), .E(CH8_OE[4]), .Y(CH8_IN[4]));
 BIBUF \BUF_CH8[5]  (.PAD(CH8[5]), .D(CH8_OUT[5]), .E(CH8_OE[5]), .Y(CH8_IN[5]));
 
 // DATA
-BIBUF \BUF_DATA[0]  (.PAD(DATA[0]), 	.D(TEST_OUT[0]),	.E(TestEn), .Y(DATA_IN[0]));
-BIBUF \BUF_DATA[1]  (.PAD(DATA[1]), 	.D(TEST_OUT[1]),	.E(TestEn), .Y(DATA_IN[1]));
-BIBUF \BUF_DATA[2]  (.PAD(DATA[2]), 	.D(TEST_OUT[2]),	.E(TestEn), .Y(DATA_IN[2]));
-BIBUF \BUF_DATA[3]  (.PAD(DATA[3]), 	.D(TEST_OUT[3]),	.E(TestEn), .Y(DATA_IN[3]));
-BIBUF \BUF_DATA[4]  (.PAD(DATA[4]), 	.D(TEST_OUT[4]),	.E(TestEn), .Y(DATA_IN[4]));
-BIBUF \BUF_DATA[5]  (.PAD(DATA[5]), 	.D(TEST_OUT[5]),	.E(TestEn), .Y(DATA_IN[5]));
-BIBUF \BUF_DATA[6]  (.PAD(DATA[6]), 	.D(TEST_OUT[6]),	.E(TestEn), .Y(DATA_IN[6]));
-BIBUF \BUF_DATA[7]  (.PAD(DATA[7]), 	.D(TEST_OUT[7]),	.E(TestEn), .Y(DATA_IN[7]));
-BIBUF \BUF_DATA[8]  (.PAD(DATA[8]), 	.D(TEST_OUT[8]),	.E(TestEn), .Y(DATA_IN[8]));
-BIBUF \BUF_DATA[9]  (.PAD(DATA[9]), 	.D(TEST_OUT[9]),	.E(TestEn), .Y(DATA_IN[9]));
-BIBUF \BUF_DATA[10]	(.PAD(DATA[10]),	.D(TEST_OUT[10]),	.E(TestEn), .Y(DATA_IN[10]));
-BIBUF \BUF_DATA[11]	(.PAD(DATA[11]),	.D(TEST_OUT[11]),	.E(TestEn), .Y(DATA_IN[11]));
+BIBUF \BUF_DATA[0]  (.PAD(DATA[0]),   .D(TEST_OUT[0]),  .E(TestEn), .Y(DATA_IN[0]));
+BIBUF \BUF_DATA[1]  (.PAD(DATA[1]),   .D(TEST_OUT[1]),  .E(TestEn), .Y(DATA_IN[1]));
+BIBUF \BUF_DATA[2]  (.PAD(DATA[2]),   .D(TEST_OUT[2]),  .E(TestEn), .Y(DATA_IN[2]));
+BIBUF \BUF_DATA[3]  (.PAD(DATA[3]),   .D(TEST_OUT[3]),  .E(TestEn), .Y(DATA_IN[3]));
+BIBUF \BUF_DATA[4]  (.PAD(DATA[4]),   .D(TEST_OUT[4]),  .E(TestEn), .Y(DATA_IN[4]));
+BIBUF \BUF_DATA[5]  (.PAD(DATA[5]),   .D(TEST_OUT[5]),  .E(TestEn), .Y(DATA_IN[5]));
+BIBUF \BUF_DATA[6]  (.PAD(DATA[6]),   .D(TEST_OUT[6]),  .E(TestEn), .Y(DATA_IN[6]));
+BIBUF \BUF_DATA[7]  (.PAD(DATA[7]),   .D(TEST_OUT[7]),  .E(TestEn), .Y(DATA_IN[7]));
+BIBUF \BUF_DATA[8]  (.PAD(DATA[8]),   .D(TEST_OUT[8]),  .E(TestEn), .Y(DATA_IN[8]));
+BIBUF \BUF_DATA[9]  (.PAD(DATA[9]),   .D(TEST_OUT[9]),  .E(TestEn), .Y(DATA_IN[9]));
+BIBUF \BUF_DATA[10]  (.PAD(DATA[10]),  .D(TEST_OUT[10]),  .E(TestEn), .Y(DATA_IN[10]));
+BIBUF \BUF_DATA[11]  (.PAD(DATA[11]),  .D(TEST_OUT[11]),  .E(TestEn), .Y(DATA_IN[11]));
 
 assign DATA_IN[15:12] = DATA[15:12];
 
@@ -249,56 +249,56 @@ assign TEST_OUT = TestMode ? {~CH5_IN,~CH1_IN} : {~CH8_IN,~CH4_IN};
 
 always @(*)
 begin
-	CH1_OUT <= CORE_CH1_OUT;
-	CH1_OE <= CORE_CH1_OE;
-	CH2_OUT <= CORE_CH2_OUT;
-	CH2_OE <= CORE_CH2_OE;
-	CH3_OUT <= CORE_CH3_OUT;
-	CH3_OE <= CORE_CH3_OE;
-	CH4_OUT <= CORE_CH4_OUT;
-	CH4_OE <= CORE_CH4_OE;
-	CH5_OUT <= CORE_CH5_OUT;
-	CH5_OE <= CORE_CH5_OE;
-	CH6_OUT <= CORE_CH6_OUT;
-	CH6_OE <= CORE_CH6_OE;
-	CH7_OUT <= CORE_CH7_OUT;
-	CH7_OE <= CORE_CH7_OE;
-	CH8_OUT <= CORE_CH8_OUT;
-	CH8_OE <= CORE_CH8_OE;
+  CH1_OUT <= CORE_CH1_OUT;
+  CH1_OE <= CORE_CH1_OE;
+  CH2_OUT <= CORE_CH2_OUT;
+  CH2_OE <= CORE_CH2_OE;
+  CH3_OUT <= CORE_CH3_OUT;
+  CH3_OE <= CORE_CH3_OE;
+  CH4_OUT <= CORE_CH4_OUT;
+  CH4_OE <= CORE_CH4_OE;
+  CH5_OUT <= CORE_CH5_OUT;
+  CH5_OE <= CORE_CH5_OE;
+  CH6_OUT <= CORE_CH6_OUT;
+  CH6_OE <= CORE_CH6_OE;
+  CH7_OUT <= CORE_CH7_OUT;
+  CH7_OE <= CORE_CH7_OE;
+  CH8_OUT <= CORE_CH8_OUT;
+  CH8_OE <= CORE_CH8_OE;
 
-	if(TestEn)
-	begin
-		CH1_OUT <= TEST_IN;
-		CH3_OUT <= ~CH2_IN;
-		CH5_OUT <= TEST_IN;
-		CH7_OUT <= ~CH6_IN;
+  if(TestEn)
+  begin
+    CH1_OUT <= TEST_IN;
+    CH3_OUT <= ~CH2_IN;
+    CH5_OUT <= TEST_IN;
+    CH7_OUT <= ~CH6_IN;
 
-		CH1_OE <= 6'b111111;
-		CH2_OE <= 6'b000000;
-		CH3_OE <= 6'b111111;
-		CH4_OE <= 6'b000000;
-		CH5_OE <= 6'b111111;
-		CH6_OE <= 6'b000000;
-		CH7_OE <= 6'b111111;
-		CH8_OE <= 6'b000000;
+    CH1_OE <= 6'b111111;
+    CH2_OE <= 6'b000000;
+    CH3_OE <= 6'b111111;
+    CH4_OE <= 6'b000000;
+    CH5_OE <= 6'b111111;
+    CH6_OE <= 6'b000000;
+    CH7_OE <= 6'b111111;
+    CH8_OE <= 6'b000000;
 
-		if(TestMode)
-		begin
-			CH8_OUT <= TEST_IN;
-			CH6_OUT <= ~CH7_IN;
-			CH4_OUT <= TEST_IN;
-			CH2_OUT <= ~CH3_IN;
+    if(TestMode)
+    begin
+      CH8_OUT <= TEST_IN;
+      CH6_OUT <= ~CH7_IN;
+      CH4_OUT <= TEST_IN;
+      CH2_OUT <= ~CH3_IN;
 
-			CH1_OE <= 6'b000000;
-			CH2_OE <= 6'b111111;
-			CH3_OE <= 6'b000000;
-			CH4_OE <= 6'b111111;
-			CH5_OE <= 6'b000000;
-			CH6_OE <= 6'b111111;
-			CH7_OE <= 6'b000000;
-			CH8_OE <= 6'b111111;
-		end
-	end
+      CH1_OE <= 6'b000000;
+      CH2_OE <= 6'b111111;
+      CH3_OE <= 6'b000000;
+      CH4_OE <= 6'b111111;
+      CH5_OE <= 6'b000000;
+      CH6_OE <= 6'b111111;
+      CH7_OE <= 6'b000000;
+      CH8_OE <= 6'b111111;
+    end
+  end
 end
 
 endmodule

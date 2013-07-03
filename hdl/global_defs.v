@@ -36,4 +36,4 @@
  */
 
 
-`define SYSTEM_CLOCK	26'd50000000
+`define SYSTEM_CLOCK  26'd50000000

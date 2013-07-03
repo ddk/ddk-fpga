@@ -38,99 +38,99 @@
 `include "../hdl/global_defs.v"
 `include "../hdl/uart_defs.v"
 
-module	uart_tx(
-		input wire 				clk,
-		input wire 				rst,
-		output reg 				dout,
-		input wire [7:0] 	data_out,
-		input wire 				en,
-		output reg 				rdy);
+module  uart_tx(
+    input wire         clk,
+    input wire         rst,
+    output reg         dout,
+    input wire [7:0]   data_out,
+    input wire         en,
+    output reg         rdy);
 
-reg	[7:0]	data;
-reg [1:0]	state;
+reg  [7:0]  data;
+reg [1:0]  state;
 reg [2:0] bit_cnt;
-reg [8:0]	etu_cnt;
+reg [8:0]  etu_cnt;
 
 wire etu_full;
 assign etu_full = (etu_cnt == `UART_FULL_ETU);
 
-always	@ (posedge clk)
+always  @ (posedge clk)
 begin
-	if (rst)
-	begin
-		state <= `UART_START;
-		dout <= 1'b1;
-		rdy <= 1'b1;
-	end
+  if (rst)
+  begin
+    state <= `UART_START;
+    dout <= 1'b1;
+    rdy <= 1'b1;
+  end
 
-	else
-	begin
-		// Default assignments
-		etu_cnt <= (etu_cnt + 1);
-		dout <= dout;
-		rdy <= rdy;
-		data <= data;
-		state <= state;
-		bit_cnt <= bit_cnt;
+  else
+  begin
+    // Default assignments
+    etu_cnt <= (etu_cnt + 1);
+    dout <= dout;
+    rdy <= rdy;
+    data <= data;
+    state <= state;
+    bit_cnt <= bit_cnt;
 
-		case(state)
+    case(state)
 
-			// Idle, waiting for enable
-			`UART_START:
-			begin
-				if(en == 1)
-				begin
-					// Start bit
-					dout <= 1'b0;
-					data <= data_out;
-					state <= `UART_DATA;
-					etu_cnt <= 9'd0;
-					bit_cnt <= 3'd0;
-					rdy <= 1'b0;
-				end
-				else
-					etu_cnt <= 9'd0;
-			end
+      // Idle, waiting for enable
+      `UART_START:
+      begin
+        if(en == 1)
+        begin
+          // Start bit
+          dout <= 1'b0;
+          data <= data_out;
+          state <= `UART_DATA;
+          etu_cnt <= 9'd0;
+          bit_cnt <= 3'd0;
+          rdy <= 1'b0;
+        end
+        else
+          etu_cnt <= 9'd0;
+      end
 
-			// Data Bits
-			`UART_DATA:
-			if(etu_full)
-			begin
-				etu_cnt <= 9'd0;
-				bit_cnt <= (bit_cnt + 1);
+      // Data Bits
+      `UART_DATA:
+      if(etu_full)
+      begin
+        etu_cnt <= 9'd0;
+        bit_cnt <= (bit_cnt + 1);
 
-				dout <= data[0];
-				data <= {data[0], data[7:1]};
+        dout <= data[0];
+        data <= {data[0], data[7:1]};
 
-				if(bit_cnt == 3'd7)
-				begin
-					state <= `UART_STOP;
-				end
-			end
+        if(bit_cnt == 3'd7)
+        begin
+          state <= `UART_STOP;
+        end
+      end
 
-			// Stop Bit(s)
-			`UART_STOP:
-			if(etu_full)
-			begin
-				etu_cnt <= 9'd0;
-				dout <= 1'b1;
-				state <= `UART_IDLE;
-			end
+      // Stop Bit(s)
+      `UART_STOP:
+      if(etu_full)
+      begin
+        etu_cnt <= 9'd0;
+        dout <= 1'b1;
+        state <= `UART_IDLE;
+      end
 
-			// Idle time before restarting
-			`UART_IDLE:
-			if(etu_full)
-			begin
-				etu_cnt <= 9'd0;
-				rdy <= 1'b1;
-				state <= `UART_START;
-			end
+      // Idle time before restarting
+      `UART_IDLE:
+      if(etu_full)
+      begin
+        etu_cnt <= 9'd0;
+        rdy <= 1'b1;
+        state <= `UART_START;
+      end
 
-			default:
-				$display ("UART TX: Invalid state 0x%X", state);
+      default:
+        $display ("UART TX: Invalid state 0x%X", state);
 
-		endcase
-	end
+    endcase
+  end
 end
 
 endmodule

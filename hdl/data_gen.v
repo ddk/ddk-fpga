@@ -35,22 +35,22 @@
  * Description: The core module. This can be safely simulated.
  */
 
-module	data_gen(
-			input wire clk,
-			input wire rst,
-			output reg [5:0] data);
+module  data_gen(
+      input wire clk,
+      input wire rst,
+      output reg [5:0] data);
 
-always	@ (posedge clk)
+always  @ (posedge clk)
 begin
-	if (rst)
-	begin
-		data <= 6'd0;
-	end
+  if (rst)
+  begin
+    data <= 6'd0;
+  end
 
-	else
-	begin
-		data <= (data + 1);
-	end
+  else
+  begin
+    data <= (data + 1);
+  end
 end
 
 endmodule

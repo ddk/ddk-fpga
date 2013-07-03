@@ -36,35 +36,35 @@
  */
 
 
-`define CH1_BASE				4'h0	// Address 0x0X
-`define CH2_BASE				4'h1	// Address 0x1X
-`define CH3_BASE				4'h2	// Address 0x2X
-`define CH4_BASE				4'h3	// Address 0x3X
-`define CH5_BASE				4'h4	// Address 0x4X
-`define CH6_BASE				4'h5	// Address 0x5X
-`define CH7_BASE				4'h6	// Address 0x6X
-`define CH8_BASE				4'h7	// Address 0x7X
-`define CLKA_BASE				4'h8	// Address 0x8X
-`define CLKB_BASE				4'h9	// Address 0x9X
-`define CLKC_BASE				4'hA	// Address 0xAX
-`define CLKD_BASE				4'hB	// Address 0xBX
+`define CH1_BASE        4'h0  // Address 0x0X
+`define CH2_BASE        4'h1  // Address 0x1X
+`define CH3_BASE        4'h2  // Address 0x2X
+`define CH4_BASE        4'h3  // Address 0x3X
+`define CH5_BASE        4'h4  // Address 0x4X
+`define CH6_BASE        4'h5  // Address 0x5X
+`define CH7_BASE        4'h6  // Address 0x6X
+`define CH8_BASE        4'h7  // Address 0x7X
+`define CLKA_BASE       4'h8  // Address 0x8X
+`define CLKB_BASE       4'h9  // Address 0x9X
+`define CLKC_BASE       4'hA  // Address 0xAX
+`define CLKD_BASE       4'hB  // Address 0xBX
 
 /*************************
   Krake Port Definitions
 *************************/
 
-`define PORT_STATUS			4'h0	// (r/w) Port status
-`define PORT_CONF				4'h1	// (r/w) Peripheral configuration register
-`define PORT_PIN0_CONF	4'h2	// (r/w) Output clocks
-`define PORT_PIN1_CONF	4'h3	// (r/w) Output clocks
-`define PORT_PIN2_CONF	4'h4	// (r/w) Output clocks
-`define PORT_PIN3_CONF	4'h5	// (r/w) Output clocks
-`define PORT_PIN4_CONF	4'h6	// (r/w) Output clocks
-`define PORT_PIN5_CONF	4'h7	// (r/w) Output clocks
+`define PORT_STATUS     4'h0  // (r/w) Port status
+`define PORT_CONF       4'h1  // (r/w) Peripheral configuration register
+`define PORT_PIN0_CONF  4'h2  // (r/w) Output clocks
+`define PORT_PIN1_CONF  4'h3  // (r/w) Output clocks
+`define PORT_PIN2_CONF  4'h4  // (r/w) Output clocks
+`define PORT_PIN3_CONF  4'h5  // (r/w) Output clocks
+`define PORT_PIN4_CONF  4'h6  // (r/w) Output clocks
+`define PORT_PIN5_CONF  4'h7  // (r/w) Output clocks
 
 /********************
   CLK Configuration
 ********************/
 
-`define CLK_GEN_STATUS	4'h0	// (r/w) Frequency generator status
-`define CLK_GEN_DIV			4'h1	// (r/w) Frequency generator period
+`define CLK_GEN_STATUS  4'h0  // (r/w) Frequency generator status
+`define CLK_GEN_DIV     4'h1  // (r/w) Frequency generator period

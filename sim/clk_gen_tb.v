@@ -41,140 +41,140 @@
 
 module clk_gen_tb();
 
-reg	tb_clk;
-reg	tb_rst;
-reg	tb_en;
+reg  tb_clk;
+reg  tb_rst;
+reg  tb_en;
 
-reg					tb_we_o;
-reg		[7:0]	tb_dat_o;
-reg		[5:2]	tb_adr_o;
-reg 				tb_stb_o;
-wire	[7:0]	tb_dat_i;
+reg         tb_we_o;
+reg  [7:0]  tb_dat_o;
+reg  [5:2]  tb_adr_o;
+reg         tb_stb_o;
+wire [7:0]  tb_dat_i;
 
 clk_gen clk_geni(
-		.clk_i(tb_clk),
-		.rst_i(tb_rst),
-		.ack_o(tb_ack_i),
-		.dat_i(tb_dat_o),
-		.adr_i(tb_adr_o),
-		.dat_o(tb_dat_i),
-		.stb_i(tb_stb_o),
-		.we_i(tb_we_o),
-		.clk_posedge(gen_clk_posedge),
-		.clk_out(gen_clk));
+    .clk_i(tb_clk),
+    .rst_i(tb_rst),
+    .ack_o(tb_ack_i),
+    .dat_i(tb_dat_o),
+    .adr_i(tb_adr_o),
+    .dat_o(tb_dat_i),
+    .stb_i(tb_stb_o),
+    .we_i(tb_we_o),
+    .clk_posedge(gen_clk_posedge),
+    .clk_out(gen_clk));
 
 
 initial
 begin
-	tb_clk <= 1'b0;
-	tb_rst <= 1'b0;
-	#5 tb_rst <= 1'b1;
-	#20 tb_rst <= 1'b0;
+  tb_clk <= 1'b0;
+  tb_rst <= 1'b0;
+  #5 tb_rst <= 1'b1;
+  #20 tb_rst <= 1'b0;
 end
 
 // Generate clock (50MHz)
 always
 begin
-	#10 tb_clk <= ~tb_clk;
+  #10 tb_clk <= ~tb_clk;
 end
 
-`define TB_READ_STATUS	2'd0
-`define TB_WRITE_STATUS	2'd1
-`define TB_READ_DIV			2'd2
-`define TB_WRITE_DIV		2'd3
+`define TB_READ_STATUS  2'd0
+`define TB_WRITE_STATUS  2'd1
+`define TB_READ_DIV      2'd2
+`define TB_WRITE_DIV    2'd3
 
 reg [1:0] tb_state;
 reg [3:0] tb_cnt;
 
-always	@ (posedge tb_clk or posedge tb_rst)
+always  @ (posedge tb_clk or posedge tb_rst)
 begin
-	if(tb_rst)
-	begin
-		tb_dat_o <= 8'h00;
-		tb_en <= 1'b0;
-		tb_we_o <= 1'b0;
-		tb_state <= `TB_WRITE_STATUS;
-		tb_cnt <= 4'd0;
-		tb_adr_o <= `CLK_GEN_STATUS;
-	end
-	else
-	begin
-		tb_stb_o <= 1'b0;
-		tb_dat_o <= tb_dat_o;
-		tb_cnt <= tb_cnt + 1;
+  if(tb_rst)
+  begin
+    tb_dat_o <= 8'h00;
+    tb_en <= 1'b0;
+    tb_we_o <= 1'b0;
+    tb_state <= `TB_WRITE_STATUS;
+    tb_cnt <= 4'd0;
+    tb_adr_o <= `CLK_GEN_STATUS;
+  end
+  else
+  begin
+    tb_stb_o <= 1'b0;
+    tb_dat_o <= tb_dat_o;
+    tb_cnt <= tb_cnt + 1;
 
-		case(tb_state)
-			`TB_WRITE_STATUS:
-			begin
-				tb_we_o <= 1'b1;
-				tb_adr_o <= `CLK_GEN_STATUS;
+    case(tb_state)
+      `TB_WRITE_STATUS:
+      begin
+        tb_we_o <= 1'b1;
+        tb_adr_o <= `CLK_GEN_STATUS;
 
-				if(tb_cnt == 4'hf)
-				begin
-					tb_stb_o <= 1'b1;
-					tb_state <= `TB_READ_STATUS;
-				end
-			end
+        if(tb_cnt == 4'hf)
+        begin
+          tb_stb_o <= 1'b1;
+          tb_state <= `TB_READ_STATUS;
+        end
+      end
 
-			`TB_READ_STATUS:
-			begin
-				tb_we_o <= 1'b0;
-				tb_adr_o <= `CLK_GEN_STATUS;
+      `TB_READ_STATUS:
+      begin
+        tb_we_o <= 1'b0;
+        tb_adr_o <= `CLK_GEN_STATUS;
 
-				case(tb_cnt)
-					4'hd:
-						tb_stb_o <= 1'b1; // Get the current value
-					4'hf:
-					begin
-						tb_dat_o[0] <= ~tb_dat_i[0]; // Flip the value
+        case(tb_cnt)
+          4'hd:
+            tb_stb_o <= 1'b1; // Get the current value
+          4'hf:
+          begin
+            tb_dat_o[0] <= ~tb_dat_i[0]; // Flip the value
 
-						if(tb_dat_i[0])
-							tb_state <= `TB_WRITE_DIV;
-						else
-							tb_state <= `TB_WRITE_STATUS; // Write it back
+            if(tb_dat_i[0])
+              tb_state <= `TB_WRITE_DIV;
+            else
+              tb_state <= `TB_WRITE_STATUS; // Write it back
 
-						if(tb_dat_i != tb_dat_o)
-							$display("tb_dat_i = %h, tb_dat_o = %h", tb_dat_i, tb_dat_o);
-					end
-				endcase
-			end
+            if(tb_dat_i != tb_dat_o)
+              $display("tb_dat_i = %h, tb_dat_o = %h", tb_dat_i, tb_dat_o);
+          end
+        endcase
+      end
 
-			`TB_WRITE_DIV:
-			begin
-				tb_we_o <= 1'b1;
-				tb_adr_o <= `CLK_GEN_DIV;
+      `TB_WRITE_DIV:
+      begin
+        tb_we_o <= 1'b1;
+        tb_adr_o <= `CLK_GEN_DIV;
 
-				if(tb_cnt == 4'hf)
-				begin
-					tb_stb_o <= 1'b1;
-					tb_state <= `TB_READ_DIV;
-				end
-			end
+        if(tb_cnt == 4'hf)
+        begin
+          tb_stb_o <= 1'b1;
+          tb_state <= `TB_READ_DIV;
+        end
+      end
 
-			`TB_READ_DIV:
-			begin
-				tb_we_o <= 1'b0;
-				tb_adr_o <= `CLK_GEN_DIV;
+      `TB_READ_DIV:
+      begin
+        tb_we_o <= 1'b0;
+        tb_adr_o <= `CLK_GEN_DIV;
 
-				case(tb_cnt)
-					4'hd:
-						tb_stb_o <= 1'b1; // Get the current value
-					4'hf:
-					begin
-						tb_dat_o <= tb_dat_o + 1; // Increment
-						if(tb_dat_o == 8'hff)
-							tb_state <= `TB_WRITE_STATUS;
-						else
-							tb_state <= `TB_WRITE_DIV;
+        case(tb_cnt)
+          4'hd:
+            tb_stb_o <= 1'b1; // Get the current value
+          4'hf:
+          begin
+            tb_dat_o <= tb_dat_o + 1; // Increment
+            if(tb_dat_o == 8'hff)
+              tb_state <= `TB_WRITE_STATUS;
+            else
+              tb_state <= `TB_WRITE_DIV;
 
-						if(tb_dat_i != tb_dat_o)
-							$display("tb_dat_i = %h, tb_dat_o = %h", tb_dat_i, tb_dat_o);
-					end
-				endcase
-			end
+            if(tb_dat_i != tb_dat_o)
+              $display("tb_dat_i = %h, tb_dat_o = %h", tb_dat_i, tb_dat_o);
+          end
+        endcase
+      end
 
-		endcase
-	end
+    endcase
+  end
 end
 
 endmodule
