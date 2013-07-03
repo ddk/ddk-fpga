@@ -32,7 +32,8 @@ The following outlines the steps necessary for installing the toolchain.
 1.	Next, download the latest version of Libero SoC [here][downloads].
 	Again, we recommend using the Windows version of the toolchain.
 	We recommend installing the (large) "Self-Contained EXE" versus the "Web Install EXE".
-*	During installation you will be prompted to install install either "Libero SoC" or "Libero SoC SA (Standalone)". Select the "Libero SoC" version.
+*	During installation you may be prompted to install install either "Libero SoC" or "Libero SoC SA (Standalone)".
+	Select the "Libero SoC" version.
 *	When prompted, make sure you select and install atleast the ProASIC 3 Nano FPGA libraries.
 	Note: you can also do this after the installation by starting "Uninstall or Modify Libero SoC" from the start menu and modifying the installation.
 *	After installation and once you have recieved your license, you can install it using the Actel License utility.
