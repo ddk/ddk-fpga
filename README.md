@@ -59,8 +59,8 @@ The [top module][top] provides a wrapper around all of the vendor specific I/O a
 Internally the [core achitecture][core] implements the open-source [Wishbone](http://cdn.opencores.org/downloads/wbspec_b4.pdf) interconnect to interface modules.
 The parallel data bus ```DATA``` as well as the ```DataClk``` and ```DataWe``` signals are converted to signals conforming to the Wishbone interconnect in the [krake_bus](hdl/krake_bus.v) module.
 
-To generate the necessary strobe signals for individual modules, addresses defined in the [reg_defs](hdl/reg_defs.v) are matched in the [ddk_core](hdl/ddk_core.v#L336).
-The addresses also switch a DAT/ACK [multiplexer](hdl/ddk_core.v#L350) that ensures that there is no bus contention among these bus lines.
+To generate the necessary strobe signals for individual modules, addresses defined in the [reg_defs](hdl/reg_defs.v) are matched in the [ddk_core](hdl/ddk_core.v#L337).
+The addresses also switch a DAT/ACK [multiplexer](hdl/ddk_core.v#L351) that ensures that there is no bus contention among these bus lines.
 Currently there is no facility to read data from the FPGA, but this is the architecture that will be used in future designs.
 
 ## Integrating Custom Modules
