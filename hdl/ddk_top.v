@@ -225,6 +225,14 @@ BIBUF \BUF_CH8[3]  (.PAD(CH8[3]), .D(CH8_OUT[3]), .E(CH8_OE[3]), .Y(CH8_IN[3]));
 BIBUF \BUF_CH8[4]  (.PAD(CH8[4]), .D(CH8_OUT[4]), .E(CH8_OE[4]), .Y(CH8_IN[4]));
 BIBUF \BUF_CH8[5]  (.PAD(CH8[5]), .D(CH8_OUT[5]), .E(CH8_OE[5]), .Y(CH8_IN[5]));
 
+assign DATA_IN[15:12] = DATA[15:12];
+
+wire [5:0] TEST_IN;
+assign TEST_IN = {RX3,TX3,DATA_IN[15:12]};
+
+wire [11:0] TEST_OUT;
+assign TEST_OUT = TestMode ? {~CH5_IN,~CH1_IN} : {~CH8_IN,~CH4_IN};
+
 // DATA
 BIBUF \BUF_DATA[0]  (.PAD(DATA[0]),   .D(TEST_OUT[0]),  .E(TestEn), .Y(DATA_IN[0]));
 BIBUF \BUF_DATA[1]  (.PAD(DATA[1]),   .D(TEST_OUT[1]),  .E(TestEn), .Y(DATA_IN[1]));
@@ -238,14 +246,6 @@ BIBUF \BUF_DATA[8]  (.PAD(DATA[8]),   .D(TEST_OUT[8]),  .E(TestEn), .Y(DATA_IN[8
 BIBUF \BUF_DATA[9]  (.PAD(DATA[9]),   .D(TEST_OUT[9]),  .E(TestEn), .Y(DATA_IN[9]));
 BIBUF \BUF_DATA[10]  (.PAD(DATA[10]),  .D(TEST_OUT[10]),  .E(TestEn), .Y(DATA_IN[10]));
 BIBUF \BUF_DATA[11]  (.PAD(DATA[11]),  .D(TEST_OUT[11]),  .E(TestEn), .Y(DATA_IN[11]));
-
-assign DATA_IN[15:12] = DATA[15:12];
-
-wire [5:0] TEST_IN;
-assign TEST_IN = {RX3,TX3,DATA_IN[15:12]};
-
-wire [11:0] TEST_OUT;
-assign TEST_OUT = TestMode ? {~CH5_IN,~CH1_IN} : {~CH8_IN,~CH4_IN};
 
 always @(*)
 begin
