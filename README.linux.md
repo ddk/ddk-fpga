@@ -23,7 +23,7 @@ Example:
 	VENDOR snpslmd  /home/YOURUSERNAME/licenses/snpslmd
 
 *	Run the wind/u cleanup script: /usr/local/microsemi/Libero_v11.1/Libero/bin/actel_wuclean -R
-*	Modify rpcbind's starup params and restart portmap: 
+*	Modify rpcbind's starup params and restart portmap:
 echo 'OPTIONS="-w -i"' | sudo tee /etc/default/rpcbind
 sudo service portmap restart
 
