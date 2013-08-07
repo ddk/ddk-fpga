@@ -37,7 +37,7 @@ module  uart_tx(
     output reg         dout,
     input wire [7:0]   data_out,
     input wire         en,
-    output reg         rdy);
+    output wire        rdy);
 
 reg  [7:0]  data;
 reg [1:0]  state;
@@ -47,13 +47,14 @@ reg [8:0]  etu_cnt;
 wire etu_full;
 assign etu_full = (etu_cnt == `UART_FULL_ETU);
 
+assign rdy = (state == `UART_START);
+
 always  @ (posedge clk)
 begin
   if (rst)
   begin
     state <= `UART_START;
     dout <= 1'b1;
-    rdy <= 1'b1;
   end
 
   else
@@ -61,7 +62,6 @@ begin
     // Default assignments
     etu_cnt <= (etu_cnt + 1);
     dout <= dout;
-    rdy <= rdy;
     data <= data;
     state <= state;
     bit_cnt <= bit_cnt;
@@ -79,10 +79,7 @@ begin
           state <= `UART_DATA;
           etu_cnt <= 9'd0;
           bit_cnt <= 3'd0;
-          rdy <= 1'b0;
         end
-        else
-          etu_cnt <= 9'd0;
       end
 
       // Data Bits
@@ -115,7 +112,6 @@ begin
       if(etu_full)
       begin
         etu_cnt <= 9'd0;
-        rdy <= 1'b1;
         state <= `UART_START;
       end
 
