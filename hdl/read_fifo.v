@@ -35,7 +35,8 @@ module  read_fifo(
     input wire [7:0]  dat_i,
     input wire [7:0]  adr_o,
     input wire        stb_o,
-    input wire        we_o);
+    input wire        we_o,
+    output wire       dout);
 
 // State machine
 reg [1:0] state;
@@ -96,7 +97,7 @@ p3_fifo fifoi(
 uart_tx txi(
     .clk(clk_i),
     .rst(rst_i),
-    //.dout,
+    .dout(dout),
     .data_out(tx_data),
     .en(tx_en),
     .rdy(tx_rdy));
