@@ -149,6 +149,16 @@ krake_bus ext_bus(
     .dat_o(dat_o),
     .we_o(we_o));
 
+read_fifo fifoi(
+    .clk_i(clk_o),
+    .rst_i(rst_o),
+    .ack_i(ack_i),
+    .dat_i(dat_i),
+    .adr_o(adr_o),
+    .stb_o(stb_o),
+    .we_o(we_o),
+    .dout(RX1));
+
 krake_port ch1(
     .clk_i(clk_o),
     .rst_i(rst_o),
