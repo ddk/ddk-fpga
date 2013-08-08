@@ -59,7 +59,11 @@ wire      tx_rdy;
 // Fifo Signals
 wire        fifo_empty;
 wire [16:0] fifo_q;
-wire        fifo_re = (state == `FIFO_STATE_IDLE && !fifo_empty);
+wire        fifo_re;
+wire [16:0] fifo_data;
+
+assign fifo_re = (state == `FIFO_STATE_IDLE && !fifo_empty);
+assign fifo_data = {rd_ack,rd_adr,rd_dat};
 
 // Internal signals
 wire       ack = fifo_q[16];
@@ -84,7 +88,7 @@ p3_fifo fifoi(
     .WCLOCK(clk_i),
     .RCLOCK(clk_i),
     .RESET(rst_i),
-    .DATA({rd_ack,rd_adr,rd_dat}),
+    .DATA(fifo_data),
     .WE(rd_valid),
     .Q(fifo_q),
     .RE(fifo_re),
