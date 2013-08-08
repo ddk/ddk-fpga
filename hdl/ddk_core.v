@@ -66,13 +66,19 @@ module ddk_core(
         output  wire  [5:0]    CH8_OUT,  // CH8 Output
         output  wire  [5:0]    CH8_OE);  // CH8 Output Enable
 
+
 // Wishbone Signals
+wire         clk_o;
+wire         rst_o;
 wire         stb_o;
 wire         we_o;
 wire  [7:0]  adr_o;
 wire  [7:0]  dat_o;
 reg   [7:0]  dat_i;
 reg          ack_i;
+
+assign clk_o = SysClk;
+assign rst_o = SysRst;
 
 // CH1
 wire         ch1_stb_i; // WB Slave STB_I
@@ -133,8 +139,8 @@ wire clkd_posedge;
 wire clkd;
 
 krake_bus ext_bus(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .data(DATA),
     .data_clk(DataClk),
     .we(DataWe),
@@ -144,8 +150,8 @@ krake_bus ext_bus(
     .we_o(we_o));
 
 krake_port ch1(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch1_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -161,8 +167,8 @@ krake_port ch1(
     .clkd(clkd));
 
 krake_port ch2(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch2_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -178,8 +184,8 @@ krake_port ch2(
     .clkd(clkd));
 
 krake_port ch3(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch3_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -195,8 +201,8 @@ krake_port ch3(
     .clkd(clkd));
 
 krake_port ch4(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch4_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -212,8 +218,8 @@ krake_port ch4(
     .clkd(clkd));
 
 krake_port ch5(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch5_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -229,8 +235,8 @@ krake_port ch5(
     .clkd(clkd));
 
 krake_port ch6(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch6_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -246,8 +252,8 @@ krake_port ch6(
     .clkd(clkd));
 
 krake_port ch7(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch7_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -263,8 +269,8 @@ krake_port ch7(
     .clkd(clkd));
 
 krake_port ch8(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(ch8_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -280,8 +286,8 @@ krake_port ch8(
     .clkd(clkd));
 
 clk_gen clk_gena(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(clka_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -292,8 +298,8 @@ clk_gen clk_gena(
     .clk_out(clka));
 
 clk_gen clk_genb(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(clkb_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -304,8 +310,8 @@ clk_gen clk_genb(
     .clk_out(clkb));
 
 clk_gen clk_genc(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(clkc_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
@@ -316,8 +322,8 @@ clk_gen clk_genc(
     .clk_out(clkc));
 
 clk_gen clk_gend(
-    .clk_i(SysClk),
-    .rst_i(SysRst),
+    .clk_i(clk_o),
+    .rst_i(rst_o),
     .ack_o(clkd_ack_o),
     .dat_i(dat_o),
     .adr_i(adr_o[3:0]),
