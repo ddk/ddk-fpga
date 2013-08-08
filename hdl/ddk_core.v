@@ -72,9 +72,9 @@ wire         clk_o;
 wire         rst_o;
 wire         stb_o;
 wire         we_o;
-wire  [7:0]  adr_o;
-wire  [7:0]  dat_o;
-reg   [7:0]  dat_i;
+wire [7:0]   adr_o;
+wire [7:0]   dat_o;
+reg  [7:0]   dat_i;
 reg          ack_i;
 
 assign clk_o = SysClk;

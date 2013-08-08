@@ -113,7 +113,6 @@ assign TestEn = RX2;
 
 wire SysRst;
 assign SysRst = TX2;
-// CLKBUF(.Y(SysRst),.PAD(TX2));
 
 wire DataWe;
 assign DataWe = RX3;
