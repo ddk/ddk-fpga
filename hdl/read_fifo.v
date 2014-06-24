@@ -124,7 +124,7 @@ begin
       begin
         if(fifo_re)
         begin
-          state <= `FIFO_STATE_ACK;
+          state <= `FIFO_STATE_DAT;
         end
       end
 
